@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>网站Cookie获取器</title>
+  <style>
+    body {
+      width: 350px;
+      padding: 10px;
+      font-family: 'Microsoft YaHei', sans-serif;
+    }
+    h1 {
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+    }
+    .domain-info {
+      font-size: 14px;
+      color: #4285f4;
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .status {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 4px;
+      background-color: #f5f5f5;
+    }
+    .cookie-container {
+      max-height: 250px;
+      overflow-y: auto;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      padding: 5px;
+      font-size: 12px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    .info-box {
+      margin-top: 15px;
+      padding: 8px;
+      background-color: #e8f0fe;
+      border-radius: 4px;
+      font-size: 11px;
+      color: #1a73e8;
+    }
+    .cookie-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .cookie-item {
+      margin-bottom: 5px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cookie-info {
+      flex: 1;
+    }
+    .cookie-meta {
+      font-size: 10px;
+      color: #666;
+    }
+    .cookie-copy {
+      background-color: #4285f4;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 10px;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    .cookie-copy:hover {
+      background-color: #3367d6;
+    }
+    .cookie-copy.copied {
+      background-color: #0f9d58;
+    }
+    .cookie-copy.error {
+      background-color: #db4437;
+    }
+    .backend-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    .backend-status .indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .backend-status .enabled {
+      background-color: #0f9d58;
+    }
+    .backend-status .disabled {
+      background-color: #db4437;
+    }
+    .config-btn {
+      background-color: #f1f1f1;
+      color: #333;
+      font-size: 12px;
+      padding: 5px 10px;
+      margin-left: 10px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .config-btn:hover {
+      background-color: #e4e4e4;
+    }
+    .search-container {
+      display: flex;
+      margin-top: 10px;
+      align-items: center;
+    }
+    .search-input {
+      flex: 1;
+      padding: 6px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    .search-btn {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin-left: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      width: auto;
+      display: inline-block;
+    }
+    .search-btn:hover {
+      background-color: #3367d6;
+    }
+    .highlight {
+      background-color: #fff3cd;
+      font-weight: bold;
+    }
+    .no-results {
+      padding: 10px;
+      text-align: center;
+      color: #db4437;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>网站Cookie获取器</h1>
+  <div class="domain-info" id="domainInfo">加载中...</div>
+  
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="搜索Cookie名称或值...">
+    <button id="searchBtn" class="search-btn">搜索</button>
+    <button id="clearSearchBtn" class="search-btn" style="background-color: #f1f1f1; color: #333;">清除</button>
+  </div>
+  
+  <div class="status" id="status">正在获取Cookie...</div>
+  <div class="cookie-container" id="cookieContainer">
+    <p>正在加载Cookie数据...</p>
+  </div>
+  <button id="refreshBtn">刷新Cookie</button>
+  <button id="copyBtn">复制所有Cookie</button>
+  
+  <div class="backend-status">
+    <div class="indicator" id="backendIndicator"></div>
+    <span id="backendStatus">后台传输: 正在加载...</span>
+    <div class="config-btn" id="configBtn">配置</div>
+  </div>
+  
+ 
+  
+  <div id="author-info" style="text-align: center; margin-top:10px;color: #0f9d58;">
+    <p>吾爱破解：你的ID</p>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html> 

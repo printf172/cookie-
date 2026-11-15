@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "网站Cookie获取器",
+  "version": "1.0",
+  "description": "获取并显示当前网站的cookie信息，支持单个cookie复制和后台传输",
+  "permissions": [
+    "cookies",
+    "tabs",
+    "storage",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_page": "config.html"
+} 

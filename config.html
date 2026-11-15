@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Cookie获取器 - 配置</title>
+  <style>
+    body {
+      width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: 'Microsoft YaHei', sans-serif;
+    }
+    h1 {
+      font-size: 24px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    .checkbox-group {
+      margin: 10px 0;
+    }
+    .btn-group {
+      margin-top: 20px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    button.secondary {
+      background-color: #f1f1f1;
+      color: #333;
+    }
+    button.secondary:hover {
+      background-color: #e4e4e4;
+    }
+    .status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .success {
+      background-color: #e6f4ea;
+      color: #0f9d58;
+    }
+    .error {
+      background-color: #fce8e6;
+      color: #db4437;
+    }
+    .info-box {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #e8f0fe;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #1a73e8;
+    }
+    .test-result {
+      margin-top: 15px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+      max-height: 150px;
+      overflow-y: auto;
+      display: none;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #4285f4;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .toggle-label {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+    .filter-section {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      border: 1px solid #e0e0e0;
+    }
+    .filter-section h3 {
+      margin-top: 0;
+      color: #333;
+      font-size: 16px;
+    }
+    .filter-item {
+      display: flex;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+    .filter-item input {
+      flex: 1;
+      margin-right: 10px;
+    }
+    .filter-item button {
+      padding: 5px 10px;
+      margin: 0;
+    }
+    .filter-list {
+      margin-top: 10px;
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 5px;
+      background-color: white;
+    }
+    .filter-tag {
+      display: inline-block;
+      background-color: #e8f0fe;
+      color: #1a73e8;
+      padding: 3px 8px;
+      margin: 3px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+    .filter-tag .remove {
+      margin-left: 5px;
+      cursor: pointer;
+      color: #db4437;
+    }
+    .tab-container {
+      margin-top: 20px;
+    }
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+    }
+    .tab-button {
+      padding: 10px 15px;
+      background-color: #f1f1f1;
+      border: none;
+      cursor: pointer;
+      margin-right: 5px;
+      border-radius: 4px 4px 0 0;
+    }
+    .tab-button.active {
+      background-color: #4285f4;
+      color: white;
+    }
+    .tab-content {
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-top: none;
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cookie获取器 - 后台配置</h1>
+  
+  <div class="tab-container">
+    <div class="tab-buttons">
+      <button class="tab-button active" data-tab="basic">基本设置</button>
+      <button class="tab-button" data-tab="filter">过滤设置</button>
+    </div>
+    
+    <div class="tab-content active" id="basic-tab">
+      <div class="form-group">
+        <div class="checkbox-group">
+          <label class="switch">
+            <input type="checkbox" id="enableBackend">
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-label">启用后台传输</span>
+        </div>
+        <p>启用后，当Cookie发生变化时，会自动将Cookie数据发送到指定的后台地址</p>
+      </div>
+      
+      <div class="form-group">
+        <label for="backendUrl">后台接口地址</label>
+        <input type="text" id="backendUrl" placeholder="例如: https://example.com/api/cookies">
+      </div>
+      
+      <div class="form-group">
+        <label for="requestMethod">请求方法</label>
+        <select id="requestMethod" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="customHeaders">自定义请求头 (JSON格式)</label>
+        <textarea id="customHeaders" placeholder='{"Content-Type": "application/json", "Authorization": "Bearer your-token"}'></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="dataFormat">数据格式 (使用 {domain} 和 {cookies} 作为占位符)</label>
+        <textarea id="dataFormat" placeholder='{"site": "{domain}", "cookieData": {cookies}}'></textarea>
+      </div>
+    </div>
+    
+    <div class="tab-content" id="filter-tab">
+      <div class="filter-section">
+        <h3>URL过滤</h3>
+        <p>设置需要监控的URL，只有匹配这些URL的请求才会发送Cookie数据</p>
+        
+        <div class="filter-item">
+          <input type="text" id="urlFilterInput" placeholder="输入URL关键词或正则表达式，例如: example.com">
+          <button id="addUrlFilter">添加</button>
+        </div>
+        
+        <div class="filter-list" id="urlFilterList">
+          <!-- URL过滤标签将在这里动态生成 -->
+        </div>
+        
+        <div class="checkbox-group" style="margin-top: 10px;">
+          <label class="switch">
+            <input type="checkbox" id="urlFilterType">
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-label">使用正则表达式匹配 (关闭则使用包含匹配)</span>
+        </div>
+      </div>
+      
+      <div class="filter-section">
+        <h3>Cookie键过滤</h3>
+        <p>设置需要发送的Cookie键，只有这些键的Cookie会被发送到后台</p>
+        
+        <div class="filter-item">
+          <input type="text" id="cookieKeyFilterInput" placeholder="输入Cookie键名，例如: sessionid">
+          <button id="addCookieKeyFilter">添加</button>
+        </div>
+        
+        <div class="filter-list" id="cookieKeyFilterList">
+          <!-- Cookie键过滤标签将在这里动态生成 -->
+        </div>
+        
+        <div class="checkbox-group" style="margin-top: 10px;">
+          <label class="switch">
+            <input type="checkbox" id="cookieFilterType">
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-label">排除模式 (开启则排除这些键，关闭则只包含这些键)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="btn-group">
+    <button id="testBtn">测试连接</button>
+    <button id="saveBtn">保存配置</button>
+    <button id="resetBtn" class="secondary">重置</button>
+  </div>
+  
+  <div id="status" class="status" style="display: none;"></div>
+  
+  <div id="testResult" class="test-result"></div>
+  
+  <div class="info-box">
+    <p><strong>说明：</strong></p>
+    <p>1. 启用后台传输后，当网站的Cookie发生变化时，会自动将数据发送到配置的后台地址</p>
+    <p>2. 数据格式中，{domain}将被替换为当前网站域名，{cookies}将被替换为Cookie数据</p>
+    <p>3. 自定义请求头和数据格式必须是有效的JSON格式</p>
+    <p>4. 配置保存后会立即生效，无需重启扩展</p>
+    <p>5. URL过滤和Cookie键过滤可以帮助您只发送需要的数据，减少不必要的网络请求</p>
+  </div>
+  
+  <script src="config.js"></script>
+</body>
+</html> 
